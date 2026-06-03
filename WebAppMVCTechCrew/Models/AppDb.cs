@@ -10,5 +10,7 @@ namespace WebAppMVCTechCrew.Models
         {
         }
         public DbSet<UsersModel> Users { get; set; }    
+
+        public DbSet<BooksModel> Books { get; set; }        
     }
 }

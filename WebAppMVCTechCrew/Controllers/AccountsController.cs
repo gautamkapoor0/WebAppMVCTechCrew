@@ -46,7 +46,7 @@ namespace WebAppMVCTechCrew.Controllers
         [HttpPost]
         public IActionResult EditUsers(UsersModel data)
         {
-            _db.Users.Update(data);
+            _db.Users.Update(data);  // all the records based on pk (ID)
             _db.SaveChanges();
             return RedirectToAction("DisplayUsers");
         }
