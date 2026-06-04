@@ -1,0 +1,82 @@
+﻿@model WebAppMVCTechCrew.Models.LoginModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+
+
+<div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+
+        <div class="col-md-5 col-lg-4">
+
+            <div class="card shadow-lg border-0 rounded-4">
+
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h3 class="mb-0">Login</h3>
+                </div>
+
+                <div class="card-body p-4">
+
+                    <form  method="post">
+
+                      
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label"></label>
+                            <input asp-for="Email"
+                                   class="form-control"
+                                   placeholder="Enter your email" />
+                          
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label"></label>
+                            <input asp-for="Password"
+                                   type="password"
+                                   class="form-control"
+                                   placeholder="Enter your password" />
+                          
+                        </div>
+
+
+                        <div class="d-grid">
+                            <button type="submit"
+                                    class="btn btn-primary btn-lg">
+                                Login
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <hr>
+
+                    <div class="text-center">
+                        <a href="#" class="text-decoration-none">
+                            Forgot Password?
+                        </a>
+                        @TempData["error"]
+                    </div>
+
+                    <div class="text-center mt-2">
+                        Don't have an account?
+                        <a asp-action="AddUsers" asp-controller="Accounts"
+                           class="text-decoration-none fw-bold">
+                            Register
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

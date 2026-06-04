@@ -1,9 +1,12 @@
-﻿@model IEnumerable<WebAppMVCTechCrew.Models.UsersModel>   
-
+﻿@model IEnumerable<WebAppMVCTechCrew.Models.ProductsModel>
 @{
-    ViewData["Title"] = "DisplayUsers";
-    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    ViewData["Title"] = "DisplayProducts";
 }
+
+<h1>DisplayProducts</h1>
+
+
+
 
 
 
@@ -15,7 +18,7 @@
     <div class="container mt-5">
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">User Details</h4>
+                <h4 class="mb-0">Products Details</h4>
             </div>
 
             <div class="card-body">
@@ -25,10 +28,10 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Password</th>
-                                <th>Gender</th>
-                                <th>Dob</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Description</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -37,28 +40,25 @@
                             {
                                 <tr>
                                     <td>
-                                        @item.ID
+                                        @item.Id
                                     </td>
                                     <td>
-                                        @item.Username
+                                        @item.Name
                                     </td>
                                     <td>
-                                        @item.Email
+                                        @item.Category
                                     </td>
                                     <td>
-                                        @item.Password
+                                        @item.Price
                                     </td>
                                     <td>
-                                        @item.Gender
+                                        @item.Stock
                                     </td>
                                     <td>
-                                        @item.Dob
+                                        @item.Description
                                     </td>
                                     <td>
-                                        <a asp-action="EditUsers" asp-controller="Accounts" asp-route-id=@item.ID>Edit</a>|
-
-                                        <a asp-action="DeleteUsers" asp-controller="Accounts" asp-route-id=@item.ID>Delete</a>
-
+                                     
                                     </td>
 
                                 </tr>

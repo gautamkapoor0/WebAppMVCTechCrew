@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebAppMVCTechCrew.Models;
 
 namespace WebAppMVCTechCrew.Controllers
@@ -22,9 +23,19 @@ namespace WebAppMVCTechCrew.Controllers
         {
             // inserted to db --> ef core 
 
-            _db.Users.Add(data);
-            _db.SaveChanges();
-            return RedirectToAction("DisplayUsers");
+            if (ModelState.IsValid)  // false when any of the property is null or empty or not valid based on the data annotations
+            {
+                _db.Users.Add(data);
+                _db.SaveChanges();
+                return RedirectToAction("Login");
+            }
+            else
+            {
+                ModelState.AddModelError("err", "Invalid Email or Password");
+                return View();
+            }
+
+           
         }
 
 
@@ -50,7 +61,7 @@ namespace WebAppMVCTechCrew.Controllers
             _db.SaveChanges();
             return RedirectToAction("DisplayUsers");
         }
-      
+
         [HttpGet]
         public IActionResult DeleteUsers(int id)
         {
@@ -72,6 +83,40 @@ namespace WebAppMVCTechCrew.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(LoginModel data)
+        {
+            var res = _db.Users.Any(x => x.Email == data.Email && x.Password == data.Password);
+            if (res)
+            {
+                return RedirectToAction("Homepage");
+            }
+            else
+            {
+                TempData["error"] = "Invalid credentials";
+                return View();
+            }
+
+        }
+
+        public IActionResult HomePage()
+        {
+
+            return View();
+        }
+        public IActionResult Logout()
+        {
+
+            return RedirectToAction("Login");
         }
 
     }
