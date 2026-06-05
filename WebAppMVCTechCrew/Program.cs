@@ -18,6 +18,15 @@ namespace WebAppMVCTechCrew
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
 
+
+            //session configuration
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+            builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -28,6 +37,8 @@ namespace WebAppMVCTechCrew
                 app.UseHsts();
             }
 
+
+            app.UseSession();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

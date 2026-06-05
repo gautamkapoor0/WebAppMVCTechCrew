@@ -1,4 +1,4 @@
-﻿
+﻿@inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Page2";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -15,4 +15,8 @@
 
 <p>
     temp data Value : @TempData["tdmessage"]
+</p>
+
+<p>
+    "Session value :"+   @HttpContextAccessor.HttpContext.Session.GetString("mysessionval")
 </p>

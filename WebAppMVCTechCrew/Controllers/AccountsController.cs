@@ -12,10 +12,11 @@ namespace WebAppMVCTechCrew.Controllers
         {
             _db = db;
         }
-
+        [SetSessionGlobally]
         [HttpGet]
         public IActionResult AddUsers()
         {
+           
             return View();
         }
         [HttpPost]
@@ -36,15 +37,16 @@ namespace WebAppMVCTechCrew.Controllers
             }
         }
 
-
+        [SetSessionGlobally]
         [HttpGet]
         public IActionResult DisplayUsers()
         {
+           
             var res = _db.Users.ToList();
             return View(res);
         }
 
-
+        [SetSessionGlobally]
         [HttpGet]
         public IActionResult EditUsers(int id)
         {
@@ -59,7 +61,7 @@ namespace WebAppMVCTechCrew.Controllers
             _db.SaveChanges();
             return RedirectToAction("DisplayUsers");
         }
-
+        [SetSessionGlobally]
         [HttpGet]
         public IActionResult DeleteUsers(int id)
         {
@@ -96,6 +98,7 @@ namespace WebAppMVCTechCrew.Controllers
             var res = _db.Users.Any(x => x.Email == data.Email && x.Password == data.Password);
             if (res)
             {
+                HttpContext.Session.SetString("MyLoginkey",data.Email);
                 return RedirectToAction("Homepage");
             }
             else
@@ -103,17 +106,16 @@ namespace WebAppMVCTechCrew.Controllers
                 TempData["error"] = "Invalid credentials";
                 return View();
             }
-
         }
-
+        [SetSessionGlobally]
         public IActionResult HomePage()
         {
-
+           
             return View();
         }
         public IActionResult Logout()
         {
-
+            HttpContext.Session.Clear();
             return RedirectToAction("Login");
         }
 

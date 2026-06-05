@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -59,6 +60,10 @@
 
             <a class="navbar-brand" asp-controller="Home" asp-action="Index">
                 My Dashboard
+
+             
+                    "Login Time"+   @HttpContextAccessor.HttpContext.Session.GetString("mysessionval")
+               
             </a>
 
             <button class="navbar-toggler"

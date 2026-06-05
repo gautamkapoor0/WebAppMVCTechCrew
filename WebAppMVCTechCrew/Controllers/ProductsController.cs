@@ -3,6 +3,7 @@ using WebAppMVCTechCrew.Models;
 
 namespace WebAppMVCTechCrew.Controllers
 {
+    [SetSessionGlobally]
     public class ProductsController : Controller
     {
 
